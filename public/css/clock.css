@@ -1,0 +1,45 @@
+
+.container1 {
+    position: relative;
+    top: 30px;
+    width: 85px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.controlls {
+    position: absolute;
+    left: 75px;
+    top: 105px;
+    text-align: center;
+}
+
+.display-remain-time {
+    font-family: 'Roboto';
+    font-weight: 100;
+    font-size: 50px;
+    color: #0f0f10;
+    margin: -70px -70px -70px -135px;
+}
+
+.e-c-base {
+    fill: none;
+    stroke: #B6B6B6;
+    stroke-width: 4px
+}
+
+.e-c-progress {
+    fill: none;
+    stroke: #0f0f10;
+    stroke-width: 4px;
+    transition: stroke-dashoffset 0.7s;
+}
+
+.e-c-pointer {
+    fill: #FFF;
+    stroke: #0f0f10;
+    stroke-width: 2px;
+}
+
+.container1 h1 { margin-top:150px; text-align:center;}
+.container1 body { background-color:#f7f7f7;}

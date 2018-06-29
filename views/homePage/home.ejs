@@ -1,0 +1,218 @@
+<% include ../header %>
+<% include ../modalFiles/modal %>
+<% include sideMenu %>
+
+<div id="mainCont" class="ui container" style="margin-top: 40px">
+
+    <% include activeNav %>
+
+    <div id="cardContent" class="ui" style="margin-top: 20px">
+
+        <% include ../cardDesign/theCards %>
+
+    </div>
+
+</div>
+
+<div id="messageArea"
+     style="background-color: white; border-radius: 15px; position: absolute; top: 40%; left: 40%; padding: 10px; font-size: large"
+     align="center">
+</div>
+
+<script>
+
+    globalCardData = null
+    userNow = '<%= username %>'
+
+    function putThemUp(data) {
+
+        $('div.link.cards').text('')
+
+        data.forEach((dataItem) => {
+
+            let type = 'tw'
+            let diff = getProperDiff(`${dataItem.date}T${dataItem.time}:00`)
+
+            if (diff >= 604800) {
+
+                type = 'uc'
+                $('#uc div.link.cards').append(`<% include ../cardDesign/cardSkeleton %>`)
+            }
+
+            else if (diff > 0)
+                $('#tw div.link.cards').append(`<% include ../cardDesign/cardSkeleton %>`)
+
+            else {
+
+                type = 'pe'
+                $('#pe div.link.cards').append(`<% include ../cardDesign/cardSkeleton %>`)
+            }
+
+            $('#newCard').attr('id', dataItem._id)
+
+            let properTitle = getProperTitle(dataItem.title)
+            $(`#${dataItem._id} .content .header`).text(properTitle)
+
+            $(`#${dataItem._id} .extra .freq-div`).text(dataItem.freq.toUpperCase())
+
+            let urgItem = dataItem.urg.toUpperCase()
+
+            if (urgItem === 'LOW')
+                $(`#${dataItem._id} .extra .urg-div`).text(urgItem).css('background-color', '#D8E392').css('border-radius', '5px').css('font-weight', 'bold')
+
+            else if (urgItem === 'NORMAL')
+                $(`#${dataItem._id} .extra .urg-div`).text(urgItem).css('background-color', '#EB9F44').css('border-radius', '5px').css('font-weight', 'bold')
+
+            else
+                $(`#${dataItem._id} .extra .urg-div`).text(urgItem).css('background-color', '#EA4329').css('border-radius', '5px').css('font-weight', 'bold')
+
+            $(`#${dataItem._id} .card-desc h3`).text(dataItem.type)
+            $(`#${dataItem._id} .card-desc .padded p`).text(dataItem.desc === '' ? 'N/A' : dataItem.desc)
+            $(`#${dataItem._id} .card-desc`).hide()
+
+            if (type === 'uc') {
+
+                $(`#${dataItem._id} .clock-div`).hide()
+
+                let properDate = getProperDate(dataItem.date)
+                $(`#${dataItem._id} .date-div h3`).text(properDate)
+
+                let properTime = getProperTime(dataItem.time)
+                $(`#${dataItem._id} .time-div h4`).text(properTime)
+            }
+
+            if (type === 'tw') {
+
+                $(`#${dataItem._id} .date-div`).hide()
+                $(`#${dataItem._id} .time-div`).hide()
+            }
+
+            if (dataItem.type === 'other')
+                $(`#${dataItem._id}.card .image img`).attr('src', `images/other${parseInt(Math.random() * 6) + 1}.jpg`)
+
+            else
+                $(`#${dataItem._id}.card .image img`).attr('src', `images/${dataItem.type}.jpg`)
+
+            getTimeGoing(dataItem._id, diff, dataItem)
+
+            $(`#${dataItem._id} .button.purple`).on('click', function () {
+
+                $(`#${dataItem._id}.card`).dimmer('hide')
+                $(`#${dataItem._id} .card-desc`).dimmer('show')
+            })
+
+            $(`#${dataItem._id} .image`).dimmer({
+
+                on: 'hover'
+            })
+
+            $(`#${dataItem._id} .button.positive`).on('click', function () {
+
+                uptId = dataItem._id
+
+                $(`.ui.modal.card-details`).modal('show')
+
+                //Auto adding fields
+                $(`.dTitle`).val(`${dataItem.title}`)
+
+                $(`div.text`).text('')
+                $(`div.text`).append(typeArr[dataItem.type])
+                $(`.cardDet .dType`).attr('required-value', dataItem.type).attr('value', dataItem.type)
+
+                $('input.dDate').val(dataItem.date)
+                $('input.dTime').val(dataItem.time)
+
+                $('#freq input').removeAttr('checked')
+                $(`#freq input.${dataItem.freq}`).attr('checked', 'checked')
+
+                $('#urg input').removeAttr('checked')
+                $(`#urg input.${dataItem.urg}`).attr('checked', 'checked')
+
+                $('.cardDet .desc').val(dataItem.desc)
+
+                //Swapping of buttons
+                $('.card-details .error.message').hide()
+                $('.ui.modal .actions .okay').hide()
+                $('.ui.modal .actions .upt').show()
+            })
+
+            $(`#${dataItem._id} .red.button`).on('click', function () {
+
+                let URL = '/card/delCard'
+                let delId = dataItem._id
+
+                $.ajax({
+                    url: URL + "/" + delId,
+                    type: 'delete',
+                    success: function (data, status, someShit) {
+
+                        console.log(data)
+
+                        if (data.err){
+
+                            let passData = {
+
+                                mes: data.mes,
+                                act: 'Login To Continue',
+                                func: function () {
+
+                                    window.location = '/user/signupin'
+                                }
+                            }
+
+                            errorFace(passData)
+                        }
+
+                        else
+                            $(`#${dataItem._id}`).hide()
+                    }
+                })
+            })
+        })
+    }
+
+    function pasteCards() {
+
+        $.get(`/card/getData/${userNow}`, function (data) {
+
+            if (data.acc) {
+
+                $('#mainCont').hide()
+                $("#sidMen .mapItem").hide()
+                $("#sidMen .searchItem").hide()
+                $("#modalAdd").hide()
+                $('#messageArea').text('')
+                $('#messageArea').append(`<p>${data.acc}<p>`)
+                $('#messageArea').append(`<p>${data.inf}<p>`)
+                return
+            }
+
+            $('#messageArea').hide()
+
+            globalCardData = data
+
+            putThemUp(globalCardData)
+        });
+    }
+
+    //initial tasks
+    pasteCards()
+
+    if ($(window).width() < 1600) {
+
+        $('#sidMen').hide()
+        $('.sorting.menu').hide()
+    }
+
+    else
+        $('.teal.buttons').hide()
+
+</script>
+<script src="js/cardScript/clock.js"></script>
+<script src="js/cardScript/cardFuncs.js"></script>
+<script src="js/homePage/activeNav.js"></script>
+<script src="js/homePage/sideMenu.js"></script>
+
+<% include ../errorModal %>
+
+<% include ../footer %>

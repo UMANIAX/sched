@@ -1,0 +1,53 @@
+<% include ../header %>
+
+<div class="ui container" style="background-color: white; left: 35%; top: 35%; position: absolute; border-radius: 15px; padding: 10px; width: 30%">
+    <form id="recovProcForm" class="ui form">
+        <div class="field">
+            <label>New Password</label>
+            <input type="password" name="password" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="New Pasword">
+        </div>
+        <div class="field">
+            <label>Confirm Password</label>
+            <input type="password" name="cpassword" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="Confirm Password">
+        </div>
+        <button class="ui button orange" type="submit">Submit</button>
+    </form>
+</div>
+
+<% include ../errorModal %>
+
+<script>
+
+    let token = '<%= token %>'
+
+    console.log(token)
+
+    $('#recovProcForm').submit(function () {
+
+        $.post(`/user/passRecov/newPass/${token}`, $(this).serialize(), function (data, status, someShit) {
+
+            if (data.err){
+
+                let passData = {
+
+                    mes: `Passwords Don't Match`,
+                    act: 'Try Again',
+                    func: function () {
+
+                        $('.modal.mes').modal('hide')
+                    }
+                }
+
+                errorFace(passData)
+            }
+
+            else
+                window.location = data.redirect
+        })
+
+        return false
+    })
+
+</script>
+
+<% include ../footer %>

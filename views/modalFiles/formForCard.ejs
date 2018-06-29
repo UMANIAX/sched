@@ -1,0 +1,94 @@
+<form class="ui form cardDet">
+
+<div class="field">
+    <label>Title</label>
+    <input class="dTitle" required type="text" name="title" placeholder="What is it About?">
+</div>
+
+<div class="field typeField">
+    <label>Type</label>
+    <div class="ui fluid search selection dropdown">
+        <input class="dType" type="hidden" name="type" required>
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Type</div>
+        <div class="menu">
+        </div>
+    </div>
+</div>
+
+<div class="field">
+    <label>Scheduled Date</label>
+    <input class="dDate" type="date" name="date" required>
+</div>
+
+<div class="field">
+    <label>Scheduled Time</label>
+    <input class="dTime" type="time" name="time" required>
+</div>
+
+
+<div id="freq" class="grouped fields">
+    <label>Frequency</label>
+    <div class="field">
+        <div class="ui slider checkbox">
+            <input class="once" type="radio" name="freq" value="once" checked="checked">
+            <label>Once</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui slider checkbox">
+            <input class="daily" type="radio" name="freq" value="daily">
+            <label>Daily</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui slider checkbox">
+            <input class="weekly" type="radio" name="freq" value="weekly">
+            <label>Weekly</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui slider checkbox">
+            <input class="monthly" type="radio" name="freq" value="monthly">
+            <label>Monthly</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui slider checkbox" X>
+            <input class="yearly" type="radio" name="freq" value="yearly">
+            <label>Yearly</label>
+        </div>
+    </div>
+</div>
+
+<div id="urg" class="grouped fields">
+    <label>Urgency</label>
+    <div class="field">
+        <div class="ui toggle checkbox">
+            <input class="low" type="radio" name="urg" value="Low" checked="checked">
+            <label>Low</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui toggle checkbox">
+            <input class="norm" type="radio" name="urg" value="Normal">
+            <label>Normal</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui toggle checkbox">
+            <input class="crit" type="radio" name="urg" value="Critical">
+            <label>Critical</label>
+        </div>
+    </div>
+</div>
+
+
+<div class="field">
+    <label>Description</label>
+    <textarea class="desc" rows="3" name="desc"></textarea>
+</div>
+
+</form>
+
+<script src="js/modalScript/cardForm.js"></script>

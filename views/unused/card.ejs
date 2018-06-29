@@ -1,0 +1,160 @@
+<div class="card column" style="margin: 10px"> <!-- id="<%= dataDisp[i].cid %>" -->
+
+    <div class="image blurring dimmable">
+
+        <div class="ui dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui buttons">
+                        <button class="ui button red">Delete</button>
+                        <div class="or"></div>
+                        <button class="ui positive button">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <img src="http://www.freeimageslive.com/galleries/medical/pics/doctors_desk.jpg">
+    </div>
+    <div class="content">
+        <div class="header" style="font-family: Coronetscript, cursive; font-size: 30px; color: #2d4373" align="center">
+
+            <!--<%-->
+            <!--tempTitle = dataDisp[i].title.split(' ')-->
+
+            <!--let newArr = []-->
+
+            <!--for (let i in tempTitle) {-->
+
+                <!--let newTitle = tempTitle[i][0].toUpperCase()-->
+
+                <!--for (let j = 1; j < tempTitle[i].length; j++)-->
+                    <!--newTitle += tempTitle[i][j].toLowerCase()-->
+
+
+                <!--newArr.push(newTitle)-->
+            <!--}-->
+
+            <!--tempTitle = newArr.join(' ')-->
+            <!--%>-->
+
+            <!--<%= tempTitle %>-->
+
+        </div>
+        <div class="meta" align="center" style="margin-top: 10px">
+            <button class="ui purple button" style="border-radius: 20px">--Description--</button>
+        </div>
+        <div class="description clock-div" style="margin-top: -20px">
+            <% include clock %>
+        </div>
+    </div>
+    <div class="extra content">
+              <span class="date-div">
+
+                  <!--<%-->
+                  <!--dateForm = dataDisp[i].date-->
+                  <!--yr = dateForm[0] + dateForm[1] + dateForm[2] + dateForm[3]-->
+                  <!--mn = dateForm[5] + dateForm[6]-->
+                  <!--dy = dateForm[8] + dateForm[9]-->
+
+                  <!--months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']-->
+                  <!--mn = months[parseInt(mn) - 1]-->
+
+                  <!--dateForm = "" + dy + " " + mn + " " + yr-->
+                  <!--%>-->
+
+                  <!--<%= dateForm %>-->
+              </span>
+        <span class="right floated time-div">
+                <i></i>
+            <!--<%-->
+            <!--timeForm = dataDisp[i].time-->
+            <!--timeAMPM = 'AM'-->
+            <!--timeHr = parseInt(timeForm[0] + timeForm[1])-->
+            <!--timeMin = timeForm[3] + timeForm[4]-->
+
+            <!--if (timeHr > 12) {-->
+
+                <!--timeHr -= 12-->
+                <!--timeAMPM = 'PM'-->
+            <!--}-->
+
+            <!--timeHr = parseInt(timeHr) > 10 ? timeHr.toString() : '0' + timeHr-->
+
+            <!--timeForm = "" + timeHr + ":" + timeMin-->
+            <!--%>-->
+            <!--<%= timeForm %>&nbsp<%= timeAMPM %>-->
+              </span>
+    </div>
+
+    <div class="ui dimmer card-desc">
+        <% include cardDesc %>
+    </div>
+
+
+    <!--<script>-->
+
+        $("#" + '<%= dataDisp[i].cid %>' + " .card-desc").hide()
+        now = '<%= dataDisp[i].date %>' + 'T' + '<%= dataDisp[i].time %>' + ':00'
+        diff = ((new Date(now)) - (new Date())) / 1000
+        getTimeGoing('<%= dataDisp[i].cid %>', diff)
+
+
+        $("#" + '<%= dataDisp[i].cid %>' + " button.purple").on('click', function () {
+
+            $("#" + '<%= dataDisp[i].cid %>' + "card").dimmer('hide')
+            $("#" + '<%= dataDisp[i].cid %>' + " .card-desc").dimmer('show')
+        })
+
+        $("#" + '<%= dataDisp[i].cid %>' + " .image").dimmer({
+            on: 'hover'
+        });
+
+        $("#" + '<%= dataDisp[i].cid %>' + " .positive.button").on('click', function () {
+
+            $('.ui.modal').modal('show')
+
+            //Auto add previous data
+            $('.cardDet .dTitle').val('<%= dataDisp[i].title %>')
+
+            $('.typeField div.text').text('')
+            $('.typeField div.text').append(typeArr['<%= dataDisp[i].type %>'])
+            $('.cardDet .dType').attr('required-value', '<%= dataDisp[i].type %>').attr('value', '<%= dataDisp[i].type %>')
+
+            $('input.dDate').val('<%= dataDisp[i].date %>')
+            $('input.dTime').val('<%= dataDisp[i].time %>')
+
+            $('#freq input').removeAttr('checked')
+            $("#" + 'freq input.<%= dataDisp[i].freq %>').attr('checked', 'checked')
+
+            $('#urg input').removeAttr('checked')
+            $("#" + 'urg input.<%= dataDisp[i].urg %>').attr('checked', 'checked')
+
+            $('.cardDet .desc').val('<%= dataDisp[i].desc %>')
+
+            //Swapping of buttons
+            $('.ui.modal .actions .upt').show()
+            $('.ui.modal .actions .ok').hide()
+
+            uptId = '<%= dataDisp[i]._id %>'
+        })
+
+        $("#" + '<%= dataDisp[i].cid %>' + " .red.button").on('click', function () {
+
+            let URL = '/card/delCard'
+            let delId = '<%= dataDisp[i]._id %>'
+
+            $.ajax({
+                url: URL + "/" + delId,
+                type: 'delete',
+                success: function (data, status, someShit) {
+
+                    alert(data.mes)
+                }
+            })
+
+            $("#" + '<%= dataDisp[i].cid %>').hide()
+        })
+
+    <!--</script>-->
+</div>

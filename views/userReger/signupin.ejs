@@ -1,0 +1,84 @@
+<% include ../header %>
+
+<div align="center" style="margin: 4rem 0rem 0rem 0rem"><h1 style="color: papayawhip">Sign In or Register</h1></div>
+<div style="border: solid 3px white; border-radius: 2px; width: 100%"></div>
+
+<div id="sign-up-in" class="ui four column doubling stackable centered grid upper-div"
+     style="margin-top: 5rem">
+
+    <form id="signUpForm" class="ui form"
+          style="background-color: white; border-radius: 15px; padding: 10px; width: 25rem; margin: 3rem">
+
+        <div class="field">
+            <label>E-Mail Address</label>
+            <input id="emailAdd" required type="email" name="email"
+                   placeholder="Please provide your email address">
+        </div>
+
+        <div id="userName" class="field">
+            <label>Username</label>
+            <input id="usernameInput" required type="text" name="username" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="Prefer a swanky one!">
+        </div>
+
+        <div id="pass" class="field">
+            <label>Password</label>
+            <input id="password" required type="password" name="password" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="Sshhh! Don't share :P">
+        </div>
+
+        <div id="passConf" class="field">
+            <label>Confirm Password</label>
+            <input id="passwordConf" required type="password" name="passwordConf" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="It's safe!">
+        </div>
+        <div class="field" align="center">
+            <button class="ui primary button" type="submit">Signup</button>
+        </div>
+    </form>
+
+    <div style="width: 20rem; margin: 3rem">
+
+        <form id="loginForm" class="ui form centered"
+              style="background-color: white; border-radius: 15px; padding: 10px">
+
+            <div id="userNameLog" class="field">
+                <label>Username</label>
+                <input id="usernameInputLog" required type="text" name="username" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="Enter Username">
+            </div>
+
+            <div id="passLog" class="field">
+                <label>Password</label>
+                <input id="passwordLog" required type="password" name="password" pattern="^[a-zA-Z0-9]{6,30}$" placeholder="Password Please :)">
+            </div>
+
+            <div class="field container">
+                <a id="passForget" style="cursor: pointer">Forgot Password?</a>
+            </div>
+
+            <div class="field" align="center">
+                <button class="ui primary button" type="submit">Login</button>
+            </div>
+
+        </form>
+
+        <div id="actionButts" class="ui" style="margin: 20px">
+            <!--<button class="ui facebook  button" style="margin-bottom: 20px; width: 200px">-->
+                <!--<i class="facebook icon"></i>-->
+                <!--Facebook-->
+            <!--</button>-->
+            <br>
+
+            <button onclick="location.href = '/user/customAuth/google'" class="ui google plus button"
+                    style="width: 200px">
+                <i class="google plus icon"></i>
+                Google Plus
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<% include forgPass %>
+<script src="js/userReger/signUpIn.js"></script>
+<script src="js/userReger/forgPass.js"></script>
+<% include ../footer %>

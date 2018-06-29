@@ -1,0 +1,52 @@
+<div id="newCard" class="card column" style="margin: 10px">
+
+    <div class="image blurring dimmable">
+
+        <div class="ui dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui buttons">
+                        <button class="ui button red">Delete</button>
+                        <div class="or"></div>
+                        <button class="ui positive button">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <img src="images/bg.jpg">
+    </div>
+    <div class="content">
+        <div class="header" style="font-family: Coronetscript, cursive; font-size: 30px; color: #2d4373" align="center">
+
+
+        </div>
+        <div class="meta" align="center" style="margin-top: 10px">
+            <button class="ui purple button" style="border-radius: 20px">--Description--</button>
+        </div>
+
+        <div class="date-div" style="margin-top: 15px">
+            <h3></h3>
+        </div>
+
+        <div class="time-div">
+            <h4></h4>
+        </div>
+
+            <% include clock %>
+    </div>
+    <div class="extra content">
+              <span class="left floated freq-div">
+
+              </span>
+        <span class="right floated urg-div">
+                <i></i>
+
+              </span>
+    </div>
+
+    <div class="ui dimmer card-desc">
+        <% include cardDesc %>
+    </div>
+
+</div>

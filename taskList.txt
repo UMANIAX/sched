@@ -1,0 +1,130 @@
+Tasks [ // Done, \\ Dropped, -> Remaining, /\ Paused, X Deprecated ]
+
+X Nav Bar
+// Make Modal
+// Decide Fields for Form
+    - Title (Text)
+    - Type (Drop Down Search Selection)
+    - Scheduled Date (Date)
+    - Scheduled Time (Time)
+    - frequency (Drop Down/ Outbound Throughput Checkbox/ )
+    - Urgency (Animated List)
+// Create card info db
+// Get the clock working
+// Display Card Data dynamically
+// Complete the card design and functionality
+    // Work on casing of title
+    // Task will go in description
+    \\ Put banner for type (clipper) (http://www.webestools.com/ribbon-generator-web20-free-online-quickribbon-generator.html)
+    // Put type in desc
+    // Do image overlay hover for crud advancements
+    // auto add fields
+    // remove auto added fields on add button
+    // make different button for update
+    // make delete interface
+
+// Make crud ops dynamic
+    // delete
+    // update and add
+
+// Make data's type fetchable every where from a for loop
+
+// link active nav to card divs
+// link active nav with scroll
+
+// Segregate in basis of this week, previous and later events
+
+// make login signnup ui
+
+// create signup using (https://code.tutsplus.com/tutorials/site-authentication-in-nodejs-user-sign-up--cms-29933) for backed validation
+// test the validation
+// use passport for auth and login (http://www.passportjs.org/docs/authenticate/)
+
+// study sessions
+    - express-session is basic session module which use server memory
+    - express-session with cookie parser uses browser cookies as data holder
+    - cookie-session is also a lightweight (and independent) cookie based session
+
+// implement passport sessions browser based (cookies) sessions
+// Enabling website refresh on pressing back button rather than rendering cached copy
+
+// implement isLoggedIn middleware
+X generate cid by uuid
+
+// link cards with users
+// create logout (by a post request)
+
+// make side menu sticky
+
+// make password recovery feature (node mailer)
+// node mailer for sending mails for  verification1
+
+// push current code to new branch and make master branch jwt token oriented with local storage rather than sessions
+    /update the get card data route for sending user the appropriate cards in card.js routes
+    /uncomment forg pass api in user.js routes
+    /uncomment auto login user in signup in user.js routes
+    /implement jwt middleware
+    -make client side ops for post login
+
+// Sort by time
+// Sort by urgency level
+
+// google auth causing problem
+
+// make sign up page responsive
+// make homepage responsive
+-> front end validation
+
+// Make Basic error handling page
+
+// Make cards freq responsive
+// Highlight urg levels
+-> add labels to active nav
+
+// reject expired tokens for card requests
+-> manage confirm account page for mobiles
+-> add go back to 404 not found
+
+-> Filters on Left
+-> Map on right
+
+-> perform form validation (https://www.sitepoint.com/client-side-form-validation-html5)
+-> Confirmation for delete
+-> random clock colours
+
+// fix one hour session problem
+// change token expiry
+
+\\ Change card designs for upcoming
+\\ change card design for past events
+
+-> change urls of forgot password and account activation after hoisting the site
+
+-> deal with signup error messages
+-> host db on mlab
+
+\\ dont make user login with email already used in gmail and vice versa
+
+// and for forgot password
+
+// make sessions based on cookies and see relevant settings
+-> Make images apropriate
+
+\\ Keep me logged in feature (look into sessions for features)
+-> encrypt signup/in info (https://www.npmjs.com/package/crypto-js)
+\\ make group meetings, social media based
+
+>-> Write a blog showing full fleged implementation of JWT tokens with passport.
+>-> Write blog on make updations via get requests to update databases simply via typing urls
+>-> Write a blog on how passport-local-mongoose reduces code
+
+T-> web gl
+T-> graph ql
+
+Furthur Enhancements: -
+
+-> Fix login mail system
+-> Set expiry to Google Auth
+-> Configure Facebook Auth
+-> add user info on home page
+
